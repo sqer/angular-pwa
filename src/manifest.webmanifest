@@ -1,9 +1,14 @@
 {
-  "name": "pwa-notification-frontend",
-  "short_name": "pwa-notification-frontend",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "id": "./",
+  "name": "Angular PWA Showcase",
+  "short_name": "Angular PWA",
+  "description": "A standalone, zoneless Angular progressive web app showcase.",
+  "theme_color": "#0c0f18",
+  "background_color": "#0c0f18",
   "display": "standalone",
+  "orientation": "any",
+  "lang": "en",
+  "categories": ["developer", "education", "utilities"],
   "scope": "./",
   "start_url": "./",
   "icons": [

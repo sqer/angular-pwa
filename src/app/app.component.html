@@ -1,5 +1,60 @@
-<button (click)="subscribeToNotifications()">Enable push notifications</button>
+<main>
+  <header class="hero">
+    <span class="eyebrow">Angular 22 · standalone · zoneless</span>
+    <h1>{{ title() }}</h1>
+    <p>
+      A focused demo of Angular's service worker, offline app shell, web app manifest,
+      signals, and browser push subscription APIs.
+    </p>
+  </header>
 
-<div *ngIf="subscription">
-  {{subscription | json}}
-</div>
+  <section class="status-grid" aria-label="PWA status">
+    <article>
+      <span class="dot" [class.active]="serviceWorkerEnabled()"></span>
+      <div>
+        <strong>Service worker</strong>
+        <span>{{ serviceWorkerEnabled() ? 'Active' : 'Development mode' }}</span>
+      </div>
+    </article>
+    <article>
+      <span class="dot" [class.active]="isOnline()"></span>
+      <div>
+        <strong>Network</strong>
+        <span>{{ isOnline() ? 'Online' : 'Offline' }}</span>
+      </div>
+    </article>
+    <article>
+      <span class="dot" [class.active]="notificationPermission() === 'granted'"></span>
+      <div>
+        <strong>Notifications</strong>
+        <span>{{ notificationPermission() }}</span>
+      </div>
+    </article>
+  </section>
+
+  <section class="demo-card">
+    <div>
+      <span class="eyebrow">Interactive demo</span>
+      <h2>Create a browser push subscription</h2>
+      <p>{{ status() }}</p>
+    </div>
+    <button
+      type="button"
+      (click)="subscribeToNotifications()"
+      [disabled]="isBusy() || !serviceWorkerEnabled()"
+    >
+      {{ isBusy() ? 'Enabling…' : 'Enable notifications' }}
+    </button>
+  </section>
+
+  @if (subscription(); as pushSubscription) {
+    <details>
+      <summary>Inspect the generated PushSubscription</summary>
+      <pre>{{ pushSubscription.toJSON() | json }}</pre>
+    </details>
+  }
+
+  <footer>
+    Build for production, serve on localhost, then switch DevTools to offline and reload.
+  </footer>
+</main>
